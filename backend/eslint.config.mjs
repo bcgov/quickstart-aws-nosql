@@ -7,6 +7,7 @@ import globals from "globals";
 export default [
   ...baseConfig,
   {
+    // Lint both source and test TypeScript files
     files: ["src/**/*.ts", "test/**/*.ts"],
     ignores: ["eslint.config.mjs"],
     plugins: {
