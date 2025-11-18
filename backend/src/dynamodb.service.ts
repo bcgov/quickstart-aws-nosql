@@ -8,9 +8,8 @@ import {
   UpdateCommand,
   DeleteCommand,
   QueryCommand,
-  ScanCommandInput,
-  QueryCommandInput,
 } from "@aws-sdk/lib-dynamodb";
+import type { ScanCommandInput, QueryCommandInput } from "@aws-sdk/lib-dynamodb";
 
 @Injectable()
 export class DynamoDBService {
