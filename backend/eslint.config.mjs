@@ -6,14 +6,13 @@ import globals from "globals";
 
 export default [
   {
+    files: [ "src/**/*.ts", "test/**/*.ts" ],
     ignores: [
-      "dist/",
-      "node_modules/",
-      ".git/",
+      "dist",
+      "node_modules",
+      ".git",
       ".happo.js",
     ],
-  },
-  {
     languageOptions: {
       parser: tsParser,
       parserOptions: {
