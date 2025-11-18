@@ -27,10 +27,6 @@ export default [
       react,
       "react-hooks": reactHooks,
     },
-    rules: {
-      ...tseslint.configs.recommended.rules,
-      ...prettier.configs.recommended.rules,
-    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -45,6 +41,10 @@ export default [
       },
     },
     rules: {
+      // Base recommended rules
+      ...tseslint.configs.recommended.rules,
+      ...prettier.configs.recommended.rules,
+      // Frontend-specific rules
       "no-restricted-imports": [
         "error",
         {
