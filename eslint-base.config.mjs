@@ -1,10 +1,10 @@
-import js from "@eslint/js";
-import tseslint from "@typescript-eslint/eslint-plugin";
-import prettier from "eslint-plugin-prettier";
-
 /**
  * Shared ESLint base configuration for frontend and backend
  * Contains common rules and ignore patterns
+ * 
+ * Note: This config doesn't import packages to avoid module resolution issues
+ * when running from subdirectories. Each config (frontend/backend) imports
+ * the necessary packages and spreads their recommended rules.
  */
 export default [
   {
@@ -17,14 +17,7 @@ export default [
     ],
   },
   {
-    plugins: {
-      "@typescript-eslint": tseslint,
-      prettier,
-    },
     rules: {
-      ...js.configs.recommended.rules,
-      ...tseslint.configs.recommended.rules,
-      ...prettier.configs.recommended.rules,
       // General ESLint rules
       "no-console": "off",
       "no-debugger": "warn",
@@ -42,7 +35,6 @@ export default [
       "@typescript-eslint/no-use-before-define": ["error", { functions: false }],
       "@typescript-eslint/no-var-requires": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
       // Prettier (reads from .prettierrc.yml)
       "prettier/prettier": ["error", { usePrettierrc: true }],
     },

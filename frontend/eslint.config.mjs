@@ -1,11 +1,25 @@
 import baseConfig from "../eslint-base.config.mjs";
+import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import prettier from "eslint-plugin-prettier";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
 
 export default [
   ...baseConfig,
+  {
+    plugins: {
+      "@typescript-eslint": tseslint,
+      prettier,
+      react,
+      "react-hooks": reactHooks,
+    },
+    rules: {
+      ...tseslint.configs.recommended.rules,
+      ...prettier.configs.recommended.rules,
+    },
+  },
   {
     ignores: [
       "**/.next/**",
@@ -27,10 +41,6 @@ export default [
         ...globals.node,
       },
     },
-    plugins: {
-      react,
-      "react-hooks": reactHooks,
-    },
     rules: {
       "no-restricted-imports": [
         "error",
@@ -51,6 +61,7 @@ export default [
       "react/display-name": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
     },
     settings: {
       react: {
