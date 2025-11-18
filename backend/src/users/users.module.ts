@@ -6,7 +6,6 @@ import { DynamoDBModule } from "src/dynamodb.module";
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
-  imports: [DynamoDBModule]
+  imports: [DynamoDBModule],
 })
-export class UsersModule {
-}
+export class UsersModule {}

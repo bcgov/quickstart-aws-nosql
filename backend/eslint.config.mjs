@@ -18,9 +18,7 @@ export default [
   },
   {
     files: ["src/**/*.ts", "test/**/*.ts"],
-    ignores: [
-      "eslint.config.mjs",
-    ],
+    ignores: ["eslint.config.mjs"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -33,7 +31,10 @@ export default [
       },
     },
     rules: {
-      "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { prefer: "type-imports" },
+      ],
     },
   },
 ];

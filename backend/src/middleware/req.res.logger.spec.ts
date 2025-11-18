@@ -1,6 +1,6 @@
 import { Test } from "@nestjs/testing";
 import { HTTPLoggerMiddleware } from "./req.res.logger";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import { Logger } from "@nestjs/common";
 
 describe("HTTPLoggerMiddleware", () => {
@@ -37,7 +37,7 @@ describe("HTTPLoggerMiddleware", () => {
     middleware.use(request, response, () => {});
 
     expect(loggerSpy).toHaveBeenCalledWith(
-      `GET /test 200 100 - Test User Agent`,
+      `GET /test 200 100 - Test User Agent`
     );
   });
 });

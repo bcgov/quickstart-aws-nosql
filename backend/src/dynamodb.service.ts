@@ -25,7 +25,7 @@ export class DynamoDBService {
     };
 
     const client = new DynamoDBClient(
-      process.env.IS_OFFLINE ? clientConfig : {},
+      process.env.IS_OFFLINE ? clientConfig : {}
     );
     this.dynamoClient = DynamoDBDocumentClient.from(client);
     this.tableName = process.env.DYNAMODB_TABLE_NAME || "users";
@@ -76,7 +76,7 @@ export class DynamoDBService {
     key: any,
     updateExpression: string,
     expressionAttributeValues: any,
-    expressionAttributeNames?: any,
+    expressionAttributeNames?: any
   ) {
     const command = new UpdateCommand({
       TableName: this.tableName,
