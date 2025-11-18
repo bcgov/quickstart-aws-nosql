@@ -95,9 +95,14 @@ export class UsersService {
   async searchUsers(
     page: number,
     limit: number,
-    sort: string, // JSON string for sort configuration
-    filter: string // JSON string for filter configuration
-  ): Promise<any> {
+    _sort: string, // JSON string for sort configuration
+    _filter: string // JSON string for filter configuration
+  ): Promise<{
+    users: UserDto[];
+    totalCount: number;
+    page: number;
+    limit: number;
+  }> {
     page = page || 1;
     if (!limit || limit > 200) {
       limit = 10;
