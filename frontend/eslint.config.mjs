@@ -12,7 +12,7 @@ export default [
     ignores: [
       "**/.next/**",
       "eslint.config.mjs",
-      "routeTree.gen.ts",
+      "**/routeTree.gen.ts",
       "**/dist/**",
       "**/node_modules/**",
       "**/coverage/**",
