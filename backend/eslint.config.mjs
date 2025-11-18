@@ -19,7 +19,7 @@ export default [
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        project: ["./tsconfig.json"],
+        project: [ "./tsconfig.json" ],
       },
       globals: {
         ...globals.node,
@@ -36,22 +36,22 @@ export default [
       "no-console": "off",
       "no-debugger": "warn",
       "no-unused-vars": "off",
-      "no-empty": ["error", { allowEmptyCatch: true }],
+      "no-empty": [ "error", { allowEmptyCatch: true } ],
       "no-undef": "off",
       "no-use-before-define": "off",
       // TypeScript rules
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [ "error", { argsIgnorePattern: "^_" } ],
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "@typescript-eslint/no-empty-interface": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/ban-types": "off",
-      "@typescript-eslint/no-use-before-define": ["error", { functions: false }],
+      "@typescript-eslint/no-use-before-define": [ "error", { functions: false } ],
       "@typescript-eslint/no-var-requires": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
+      "@typescript-eslint/consistent-type-imports": [ "error", { prefer: "type-imports" } ],
       // Prettier
-      "prettier/prettier": ["error", { endOfLine: "auto" }],
+      "prettier/prettier": [ "error", { endOfLine: "auto" } ],
     },
   },
 ];
