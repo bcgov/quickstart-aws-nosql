@@ -9,6 +9,18 @@ import globals from "globals";
 export default [
   ...baseConfig,
   {
+    ignores: [
+      "**/.next/**",
+      "eslint.config.mjs",
+      "routeTree.gen.ts",
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/coverage/**",
+      "**/e2e/**",
+    ],
+  },
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
     plugins: {
       "@typescript-eslint": tseslint,
       prettier,
@@ -19,15 +31,6 @@ export default [
       ...tseslint.configs.recommended.rules,
       ...prettier.configs.recommended.rules,
     },
-  },
-  {
-    ignores: [
-      "**/.next/**",
-      "eslint.config.mjs",
-      "routeTree.gen.ts",
-    ],
-  },
-  {
     languageOptions: {
       parser: tsParser,
       parserOptions: {
