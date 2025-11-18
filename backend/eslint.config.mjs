@@ -7,18 +7,12 @@ import globals from "globals";
 export default [
   ...baseConfig,
   {
+    files: ["src/**/*.ts", "test/**/*.ts"],
+    ignores: ["eslint.config.mjs"],
     plugins: {
       "@typescript-eslint": tseslint,
       prettier,
     },
-    rules: {
-      ...tseslint.configs.recommended.rules,
-      ...prettier.configs.recommended.rules,
-    },
-  },
-  {
-    files: ["src/**/*.ts", "test/**/*.ts"],
-    ignores: ["eslint.config.mjs"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -31,6 +25,8 @@ export default [
       },
     },
     rules: {
+      ...tseslint.configs.recommended.rules,
+      ...prettier.configs.recommended.rules,
       "@typescript-eslint/consistent-type-imports": [
         "error",
         { prefer: "type-imports" },
