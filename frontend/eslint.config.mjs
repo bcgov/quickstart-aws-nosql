@@ -24,7 +24,7 @@ export default [
         ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: { jsx: true },
-        project: ["./tsconfig.eslint.json"],
+        project: [ "./tsconfig.eslint.json" ],
       },
       globals: {
         ...globals.browser,
