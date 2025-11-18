@@ -36,7 +36,7 @@ export default [
       "@typescript-eslint/no-var-requires": "off",
       "@typescript-eslint/explicit-function-return-type": "off",
       // Prettier (reads from .prettierrc.yml)
-      "prettier/prettier": ["error", { usePrettierrc: true }],
+      "prettier/prettier": "error",
     },
   },
 ];
