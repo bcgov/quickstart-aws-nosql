@@ -1,7 +1,7 @@
 /**
  * Shared ESLint base configuration for frontend and backend
  * Contains common rules and ignore patterns
- * 
+ *
  * Note: This config doesn't import packages to avoid module resolution issues
  * when running from subdirectories. Each config (frontend/backend) imports
  * the necessary packages and spreads their recommended rules.
