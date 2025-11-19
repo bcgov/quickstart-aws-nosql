@@ -1,19 +1,9 @@
-# .prettierrc.yml
+# Prettier configuration
+# See https://prettier.io/docs/en/configuration.html
 
-# Use single quotes instead of double quotes
-singleQuote: false
-
-# Use 2 spaces for indentation
-tabWidth: 2
-
-# Use spaces instead of tabs
-useTabs: false
-
-# Add a trailing comma to the last item in an object or array
-trailingComma: "all"
-
-# Print semicolons at the ends of statements
+endOfLine: "auto"
 semi: true
-
-# Wrap prose-like comments as-is
-proseWrap: "always"
+singleQuote: false
+tabWidth: 2
+trailingComma: "all"
+printWidth: 80

@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { DynamoDBClient, DynamoDBClientConfig } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
@@ -8,6 +8,10 @@ import {
   UpdateCommand,
   DeleteCommand,
   QueryCommand,
+} from "@aws-sdk/lib-dynamodb";
+import type {
+  ScanCommandInput,
+  QueryCommandInput,
 } from "@aws-sdk/lib-dynamodb";
 
 @Injectable()
@@ -40,7 +44,7 @@ export class DynamoDBService {
   }
 
   // Helper methods for common operations
-  async get(key: any) {
+  async get(key: Record<string, unknown>) {
     const command = new GetCommand({
       TableName: this.tableName,
       Key: key,
@@ -48,7 +52,7 @@ export class DynamoDBService {
     return this.dynamoClient.send(command);
   }
 
-  async put(item: any) {
+  async put(item: Record<string, unknown>) {
     const command = new PutCommand({
       TableName: this.tableName,
       Item: item,
@@ -56,7 +60,7 @@ export class DynamoDBService {
     return this.dynamoClient.send(command);
   }
 
-  async scan(options: any = {}) {
+  async scan(options: Partial<Omit<ScanCommandInput, "TableName">> = {}) {
     const command = new ScanCommand({
       TableName: this.tableName,
       ...options,
@@ -64,7 +68,7 @@ export class DynamoDBService {
     return this.dynamoClient.send(command);
   }
 
-  async query(options: any) {
+  async query(options: Omit<QueryCommandInput, "TableName">) {
     const command = new QueryCommand({
       TableName: this.tableName,
       ...options,
@@ -73,10 +77,10 @@ export class DynamoDBService {
   }
 
   async update(
-    key: any,
+    key: Record<string, unknown>,
     updateExpression: string,
-    expressionAttributeValues: any,
-    expressionAttributeNames?: any,
+    expressionAttributeValues: Record<string, unknown>,
+    expressionAttributeNames?: Record<string, string>,
   ) {
     const command = new UpdateCommand({
       TableName: this.tableName,
@@ -91,7 +95,7 @@ export class DynamoDBService {
     return this.dynamoClient.send(command);
   }
 
-  async delete(key: any) {
+  async delete(key: Record<string, unknown>) {
     const command = new DeleteCommand({
       TableName: this.tableName,
       Key: key,

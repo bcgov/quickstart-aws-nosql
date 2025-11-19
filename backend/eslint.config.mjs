@@ -1,56 +1,40 @@
-import js from "@eslint/js";
+import baseConfig from "../eslint-base.config.mjs";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import prettier from "eslint-plugin-prettier";
 import globals from "globals";
 
 export default [
+  ...baseConfig,
   {
-    files: [ "src/**/*.ts", "test/**/*.ts" ],
-    ignores: [
-      "dist",
-      "node_modules",
-      ".git",
-      ".happo.js",
-    ],
+    // Define plugins globally so baseConfig rules can use them
+    plugins: {
+      "@typescript-eslint": tseslint,
+      prettier,
+    },
+  },
+  {
+    // Lint both source and test TypeScript files
+    files: ["src/**/*.ts", "test/**/*.ts"],
+    ignores: ["eslint.config.mjs"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        project: [ "./tsconfig.json" ],
+        project: ["./tsconfig.json"],
       },
       globals: {
         ...globals.node,
       },
     },
-    plugins: {
-      "@typescript-eslint": tseslint,
-      prettier,
-    },
     rules: {
-      ...js.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
       ...prettier.configs.recommended.rules,
-      "no-console": "off",
-      "no-debugger": "warn",
-      "no-unused-vars": "off",
-      "no-empty": [ "error", { allowEmptyCatch: true } ],
-      "no-undef": "off",
-      "no-use-before-define": "off",
-      // TypeScript rules
-      "@typescript-eslint/no-unused-vars": [ "error", { argsIgnorePattern: "^_" } ],
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-empty-interface": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/ban-types": "off",
-      "@typescript-eslint/no-use-before-define": [ "error", { functions: false } ],
-      "@typescript-eslint/no-var-requires": "off",
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/consistent-type-imports": [ "error", { prefer: "type-imports" } ],
-      // Prettier
-      "prettier/prettier": [ "error", { endOfLine: "auto" } ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { prefer: "type-imports" },
+      ],
     },
   },
 ];

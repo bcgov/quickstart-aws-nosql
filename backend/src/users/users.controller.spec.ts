@@ -1,11 +1,13 @@
-import { Test, TestingModule } from "@nestjs/testing";
+import type { TestingModule } from "@nestjs/testing";
+import { Test } from "@nestjs/testing";
 import { UsersController } from "./users.controller";
 import { UsersService } from "./users.service";
 import request from "supertest";
-import { HttpException, INestApplication } from "@nestjs/common";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import { UserDto } from "./dto/user.dto";
+import type { INestApplication } from "@nestjs/common";
+import { HttpException } from "@nestjs/common";
+import type { CreateUserDto } from "./dto/create-user.dto";
+import type { UpdateUserDto } from "./dto/update-user.dto";
+import type { UserDto } from "./dto/user.dto";
 import { DynamoDBService } from "src/dynamodb.service";
 
 describe("UserController", () => {
@@ -65,10 +67,15 @@ describe("UserController", () => {
       expect(usersService.create).toHaveBeenCalledWith(createUserDto);
       expect(result).toEqual(expectedResult);
     });
-  });  describe("findAll", () => {
+  });
+  describe("findAll", () => {
     it("should return an array of users", async () => {
       const result = [];
-      result.push({ id: "test-uuid-1", name: "Alice", email: "test@gmail.com" });
+      result.push({
+        id: "test-uuid-1",
+        name: "Alice",
+        email: "test@gmail.com",
+      });
       vi.spyOn(usersService, "findAll").mockResolvedValue(result);
       expect(await controller.findAll()).toBe(result);
     });
@@ -107,7 +114,8 @@ describe("UserController", () => {
         id: "test-uuid-1",
         name: "John Doe",
         email: "johndoe@example.com",
-      };      vi.spyOn(usersService, "update").mockResolvedValue(userDto);
+      };
+      vi.spyOn(usersService, "update").mockResolvedValue(userDto);
 
       expect(await controller.update(id, updateUserDto)).toBe(userDto);
       expect(usersService.update).toHaveBeenCalledWith(id, updateUserDto);
@@ -126,7 +134,8 @@ describe("UserController", () => {
   // Test the GET /users/search endpoint
   describe("GET /users/search", () => {
     // Test with valid query parameters
-    it("given valid query parameters_should return an array of users with pagination metadata", async () => {      // Mock the usersService.searchUsers method to return a sample result
+    it("given valid query parameters_should return an array of users with pagination metadata", async () => {
+      // Mock the usersService.searchUsers method to return a sample result
       const result = {
         users: [
           { id: "test-uuid-1", name: "Alice", email: "alice@example.com" },
@@ -142,11 +151,12 @@ describe("UserController", () => {
 
       // Make a GET request with query parameters and expect a 200 status code and the result object
       return request(app.getHttpServer())
-        .get("/users/search")        .query({
+        .get("/users/search")
+        .query({
           page: 1,
           limit: 10,
-          sort: '{}',
-          filter: '{}',
+          sort: "{}",
+          filter: "{}",
         })
         .expect(200)
         .expect(result);

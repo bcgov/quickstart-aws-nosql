@@ -14,6 +14,16 @@ export default defineConfig({
     css: false,
     coverage: {
       reporter: ['lcov', 'text-summary', 'text', 'json', 'html'],
+      exclude: [
+        '**/node_modules/**',
+        '**/e2e/**',
+        '**/__tests__/**',
+        '**/*.test.{ts,tsx}',
+        '**/*.spec.{ts,tsx}',
+        '**/routeTree.gen.ts',
+        '**/test-setup.ts',
+        '**/test-utils.tsx',
+      ],
     },
   },
 })

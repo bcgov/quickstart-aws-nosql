@@ -53,20 +53,25 @@ describe("UserService", () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        UsersService,        {
+        UsersService,
+        {
           provide: DynamoDBService,
           useValue: {
             put: vi.fn().mockResolvedValue({ $metadata: {} }),
             get: vi.fn().mockResolvedValue({ Item: mockUser1, $metadata: {} }),
-            scan: vi.fn().mockResolvedValue({ Items: [mockUser1, mockUser2], Count: 2, $metadata: {} }),
-            update: vi.fn().mockResolvedValue({ 
+            scan: vi.fn().mockResolvedValue({
+              Items: [mockUser1, mockUser2],
+              Count: 2,
+              $metadata: {},
+            }),
+            update: vi.fn().mockResolvedValue({
               Attributes: {
                 id: "test-uuid-123",
                 name: "Test Numone update",
                 email: "numoneupdate@test.com",
-                updatedAt: "2024-01-01T00:00:00.000Z"
+                updatedAt: "2024-01-01T00:00:00.000Z",
               },
-              $metadata: {}
+              $metadata: {},
             }),
             delete: vi.fn().mockResolvedValue({ $metadata: {} }),
           },
@@ -85,7 +90,7 @@ describe("UserService", () => {
   describe("create", () => {
     it("should successfully add a user", async () => {
       const result = await service.create(createUserDto);
-      
+
       expect(result).toEqual(userDtoResponse);
       expect(dynamoDBService.put).toHaveBeenCalledWith({
         id: "test-uuid-123",
@@ -101,7 +106,7 @@ describe("UserService", () => {
   describe("findAll", () => {
     it("should return an array of users", async () => {
       const users = await service.findAll();
-      
+
       expect(users).toEqual([
         { id: "test-uuid-123", name: "Test Numone", email: "numone@test.com" },
         { id: "test-uuid-456", name: "Test Numtwo", email: "numtwo@test.com" },
@@ -113,20 +118,26 @@ describe("UserService", () => {
   describe("findOne", () => {
     it("should get a single user", async () => {
       const user = await service.findOne("test-uuid-123");
-      
+
       expect(user).toEqual(userDtoResponse);
       expect(dynamoDBService.get).toHaveBeenCalledWith({ id: "test-uuid-123" });
-    });    it("should throw error when user not found", async () => {
-      vi.spyOn(dynamoDBService, "get").mockResolvedValueOnce({ Item: undefined, $metadata: {} });
-      
-      await expect(service.findOne("non-existent-id")).rejects.toThrow("User with id non-existent-id not found");
+    });
+    it("should throw error when user not found", async () => {
+      vi.spyOn(dynamoDBService, "get").mockResolvedValueOnce({
+        Item: undefined,
+        $metadata: {},
+      });
+
+      await expect(service.findOne("non-existent-id")).rejects.toThrow(
+        "User with id non-existent-id not found",
+      );
     });
   });
 
   describe("update", () => {
     it("should call the update method", async () => {
       const user = await service.update("test-uuid-123", updateUserDto);
-      
+
       expect(user).toEqual(updatedUserResponse);
       expect(dynamoDBService.update).toHaveBeenCalledWith(
         { id: "test-uuid-123" },
@@ -139,7 +150,7 @@ describe("UserService", () => {
         {
           "#name": "name",
           "#email": "email",
-        }
+        },
       );
       expect(dynamoDBService.update).toHaveBeenCalledTimes(1);
     });
@@ -148,17 +159,19 @@ describe("UserService", () => {
   describe("remove", () => {
     it("should return {deleted: true}", async () => {
       const result = await service.remove("test-uuid-123");
-      
+
       expect(result).toEqual({ deleted: true });
-      expect(dynamoDBService.delete).toHaveBeenCalledWith({ id: "test-uuid-123" });
+      expect(dynamoDBService.delete).toHaveBeenCalledWith({
+        id: "test-uuid-123",
+      });
     });
 
     it("should return {deleted: false, message: err.message}", async () => {
       const mockError = new Error("Bad Delete Method.");
       vi.spyOn(dynamoDBService, "delete").mockRejectedValueOnce(mockError);
-      
+
       const result = await service.remove("test-uuid-123");
-      
+
       expect(result).toEqual({
         deleted: false,
         message: "Bad Delete Method.",
@@ -178,8 +191,16 @@ describe("UserService", () => {
 
       expect(result).toEqual({
         users: [
-          { id: "test-uuid-123", name: "Test Numone", email: "numone@test.com" },
-          { id: "test-uuid-456", name: "Test Numtwo", email: "numtwo@test.com" },
+          {
+            id: "test-uuid-123",
+            name: "Test Numone",
+            email: "numone@test.com",
+          },
+          {
+            id: "test-uuid-456",
+            name: "Test Numtwo",
+            email: "numtwo@test.com",
+          },
         ],
         totalCount: 2,
         page: 1,
@@ -197,8 +218,16 @@ describe("UserService", () => {
 
       expect(result).toEqual({
         users: [
-          { id: "test-uuid-123", name: "Test Numone", email: "numone@test.com" },
-          { id: "test-uuid-456", name: "Test Numtwo", email: "numtwo@test.com" },
+          {
+            id: "test-uuid-123",
+            name: "Test Numone",
+            email: "numone@test.com",
+          },
+          {
+            id: "test-uuid-456",
+            name: "Test Numtwo",
+            email: "numtwo@test.com",
+          },
         ],
         totalCount: 2,
         page: 1,
@@ -215,8 +244,16 @@ describe("UserService", () => {
 
       expect(result).toEqual({
         users: [
-          { id: "test-uuid-123", name: "Test Numone", email: "numone@test.com" },
-          { id: "test-uuid-456", name: "Test Numtwo", email: "numtwo@test.com" },
+          {
+            id: "test-uuid-123",
+            name: "Test Numone",
+            email: "numone@test.com",
+          },
+          {
+            id: "test-uuid-456",
+            name: "Test Numtwo",
+            email: "numtwo@test.com",
+          },
         ],
         totalCount: 2,
         page: 1,
@@ -234,8 +271,16 @@ describe("UserService", () => {
 
       expect(result).toEqual({
         users: [
-          { id: "test-uuid-123", name: "Test Numone", email: "numone@test.com" },
-          { id: "test-uuid-456", name: "Test Numtwo", email: "numtwo@test.com" },
+          {
+            id: "test-uuid-123",
+            name: "Test Numone",
+            email: "numone@test.com",
+          },
+          {
+            id: "test-uuid-456",
+            name: "Test Numtwo",
+            email: "numtwo@test.com",
+          },
         ],
         totalCount: 2,
         page: 1,

@@ -12,7 +12,7 @@ export default ({ mode }) => {
     }
   }
 
-  const define: Record<string, any> = {
+  const define: Record<string, string> = {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   }
   return defineConfig({
