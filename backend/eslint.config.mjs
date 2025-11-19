@@ -10,10 +10,6 @@ export default [
     // Lint both source and test TypeScript files
     files: ["src/**/*.ts", "test/**/*.ts"],
     ignores: ["eslint.config.mjs"],
-    plugins: {
-      "@typescript-eslint": tseslint,
-      prettier,
-    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -24,6 +20,10 @@ export default [
       globals: {
         ...globals.node,
       },
+    },
+    plugins: {
+      "@typescript-eslint": tseslint,
+      prettier,
     },
     rules: {
       ...tseslint.configs.recommended.rules,

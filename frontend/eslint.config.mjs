@@ -21,12 +21,6 @@ export default [
   },
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
-    plugins: {
-      "@typescript-eslint": tseslint,
-      prettier,
-      react,
-      "react-hooks": reactHooks,
-    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -39,6 +33,12 @@ export default [
         ...globals.browser,
         ...globals.node,
       },
+    },
+    plugins: {
+      "@typescript-eslint": tseslint,
+      prettier,
+      react,
+      "react-hooks": reactHooks,
     },
     rules: {
       // Base recommended rules
