@@ -57,7 +57,7 @@ export class DynamoDBService {
     return this.dynamoClient.send(command);
   }
 
-  async scan(options: Partial<ScanCommandInput> = {}) {
+  async scan(options: Partial<Omit<ScanCommandInput, "TableName">> = {}) {
     const command = new ScanCommand({
       TableName: this.tableName,
       ...options,
@@ -65,7 +65,7 @@ export class DynamoDBService {
     return this.dynamoClient.send(command);
   }
 
-  async query(options: QueryCommandInput) {
+  async query(options: Omit<QueryCommandInput, "TableName">) {
     const command = new QueryCommand({
       TableName: this.tableName,
       ...options,
