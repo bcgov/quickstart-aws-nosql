@@ -34,7 +34,7 @@ const ModalComponent: FC<ModalProps> = ({ show, onHide, user }) => {
 }
 
 const Dashboard: FC = () => {
-  const [data, setData] = useState<any>([])
+  const [data, setData] = useState<UserDto[]>([])
   const [selectedUser, setSelectedUser] = useState<UserDto | undefined>(
     undefined,
   )
