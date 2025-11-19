@@ -7,6 +7,13 @@ import globals from "globals";
 export default [
   ...baseConfig,
   {
+    // Define plugins globally so baseConfig rules can use them
+    plugins: {
+      "@typescript-eslint": tseslint,
+      prettier,
+    },
+  },
+  {
     // Lint both source and test TypeScript files
     files: ["src/**/*.ts", "test/**/*.ts"],
     ignores: ["eslint.config.mjs"],
@@ -20,10 +27,6 @@ export default [
       globals: {
         ...globals.node,
       },
-    },
-    plugins: {
-      "@typescript-eslint": tseslint,
-      prettier,
     },
     rules: {
       ...tseslint.configs.recommended.rules,
