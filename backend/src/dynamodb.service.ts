@@ -9,7 +9,10 @@ import {
   DeleteCommand,
   QueryCommand,
 } from "@aws-sdk/lib-dynamodb";
-import type { ScanCommandInput, QueryCommandInput } from "@aws-sdk/lib-dynamodb";
+import type {
+  ScanCommandInput,
+  QueryCommandInput,
+} from "@aws-sdk/lib-dynamodb";
 
 @Injectable()
 export class DynamoDBService {
@@ -26,7 +29,7 @@ export class DynamoDBService {
     };
 
     const client = new DynamoDBClient(
-      process.env.IS_OFFLINE ? clientConfig : {}
+      process.env.IS_OFFLINE ? clientConfig : {},
     );
     this.dynamoClient = DynamoDBDocumentClient.from(client);
     this.tableName = process.env.DYNAMODB_TABLE_NAME || "users";
@@ -77,7 +80,7 @@ export class DynamoDBService {
     key: Record<string, unknown>,
     updateExpression: string,
     expressionAttributeValues: Record<string, unknown>,
-    expressionAttributeNames?: Record<string, string>
+    expressionAttributeNames?: Record<string, string>,
   ) {
     const command = new UpdateCommand({
       TableName: this.tableName,

@@ -9,7 +9,7 @@ const globalLoggerFormat: winston.Logform.Format = winston.format.timestamp({
 const localLoggerFormat: winston.Logform.Format = winston.format.combine(
   winston.format.colorize(),
   winston.format.align(),
-  utilities.format.nestLike("Backend", { prettyPrint: true })
+  utilities.format.nestLike("Backend", { prettyPrint: true }),
 );
 
 export const customLogger: LoggerService = WinstonModule.createLogger({
@@ -19,7 +19,7 @@ export const customLogger: LoggerService = WinstonModule.createLogger({
       format: winston.format.combine(
         globalLoggerFormat,
         localLoggerFormat,
-        winston.format.colorize({ level: true })
+        winston.format.colorize({ level: true }),
       ),
     }),
   ],

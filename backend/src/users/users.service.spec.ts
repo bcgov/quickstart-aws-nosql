@@ -129,7 +129,7 @@ describe("UserService", () => {
       });
 
       await expect(service.findOne("non-existent-id")).rejects.toThrow(
-        "User with id non-existent-id not found"
+        "User with id non-existent-id not found",
       );
     });
   });
@@ -150,7 +150,7 @@ describe("UserService", () => {
         {
           "#name": "name",
           "#email": "email",
-        }
+        },
       );
       expect(dynamoDBService.update).toHaveBeenCalledTimes(1);
     });

@@ -35,7 +35,7 @@ export class UsersController {
     @Query("page") page: number,
     @Query("limit") limit: number,
     @Query("sort") sort: string, // JSON string to store sort key and sort value, ex: {name: "ASC"}
-    @Query("filter") filter: string // JSON array for key, operation and value, ex: [{key: "name", operation: "like", value: "Peter"}]
+    @Query("filter") filter: string, // JSON array for key, operation and value, ex: [{key: "name", operation: "like", value: "Peter"}]
   ) {
     if (isNaN(page) || isNaN(limit)) {
       throw new HttpException("Invalid query parameters", 400);

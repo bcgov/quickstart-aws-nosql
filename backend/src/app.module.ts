@@ -22,7 +22,7 @@ export class AppModule {
       .apply(HTTPLoggerMiddleware)
       .exclude(
         { path: "metrics", method: RequestMethod.ALL },
-        { path: "health", method: RequestMethod.ALL }
+        { path: "health", method: RequestMethod.ALL },
       )
       .forRoutes("*");
   }

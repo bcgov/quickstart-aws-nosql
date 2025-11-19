@@ -146,7 +146,7 @@ describe("UserController", () => {
         limit: 10,
       };
       vi.spyOn(usersService, "searchUsers").mockImplementation(
-        async () => result
+        async () => result,
       );
 
       // Make a GET request with query parameters and expect a 200 status code and the result object

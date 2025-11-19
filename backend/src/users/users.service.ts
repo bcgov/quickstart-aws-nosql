@@ -73,7 +73,7 @@ export class UsersService {
       { id },
       updateExpression,
       expressionAttributeValues,
-      expressionAttributeNames
+      expressionAttributeNames,
     );
 
     return {
@@ -96,7 +96,7 @@ export class UsersService {
     page: number,
     limit: number,
     _sort: string, // JSON string for sort configuration
-    _filter: string // JSON string for filter configuration
+    _filter: string, // JSON string for filter configuration
   ): Promise<{
     users: UserDto[];
     totalCount: number;
