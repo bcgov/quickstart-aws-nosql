@@ -1,12 +1,12 @@
 name: .Tests
 
 on:
- workflow_call:
-  inputs:
-    tag:
-      description: 'The tag of the containers to run tests on'
-      required: true
-      type: string
+  workflow_call:
+    inputs:
+      tag:
+        description: "The tag of the containers to run tests on"
+        required: true
+        type: string
 
 permissions:
   contents: write # This is required for actions/checkout
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: bcgov/action-test-and-analyse@afffbe41eabeb9380cf96a5f7cba3ee01caeb76d # v2.0.0
+      - uses: bcgov/action-test-and-analyse@8f699e3fd3fadd9a6adf6f4b1f2638ef7ecfefb9 # v2.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONTEND }}
         with:
