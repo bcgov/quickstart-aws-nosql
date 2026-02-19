@@ -31,7 +31,7 @@ jobs:
       - name: PR Number
         if: ${{ github.event_name != 'workflow_dispatch' }} 
         id: pr
-        uses: bcgov-nr/action-get-pr@35514fa1d4765547da319e967b509363598e8b46 # v0.1.0
+        uses: bcgov/action-get-pr@35514fa1d4765547da319e967b509363598e8b46 # v0.1.0
   resume-resources:
     name: Resume Resources # This job resumes resources for the merged PR which is needed if the resources were paused.
     needs: [vars]
